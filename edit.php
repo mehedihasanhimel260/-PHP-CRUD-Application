@@ -1,21 +1,19 @@
 <?php
 include 'config.php';
 
-// Assuming config.php establishes a database connection
 
-$sql = 'SELECT `id`, `name`, `email`, `phone` FROM `user` WHERE 1';
+$id = $_GET['id']; 
+$sql = "SELECT `id`, `name`, `email`, `phone` FROM `user` WHERE `id` = '$id'";
 $result = $conn->query($sql);
 
 $row = $result->fetch_assoc();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Collect form data
     $id = $_POST['id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
 
-    // SQL update query
     $sql = "UPDATE `user` SET `name`='$name', `email`='$email', `phone`='$phone' WHERE `id`='$id'";
 
     if ($conn->query($sql) === true) {
